@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .reactEasyCrop_Cover_Vertical {
-  max-width: none;
+    max-width: none;
 }
