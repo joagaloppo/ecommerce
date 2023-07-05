@@ -1,5 +1,6 @@
 'use client';
 
+import Dropzone from './components/Dropzone';
 import React, { useCallback, useState } from 'react';
 import Image from 'next/image';
 import { Dialog, DialogContent } from '@radix-ui/react-dialog';
@@ -44,12 +45,14 @@ const App = () => {
         setCroppedImage(null);
     }, []);
 
-    const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            const imageDataUrl = await readFile(file);
-            setImageSrc(imageDataUrl);
-        }
+    const onFileChange = async (e: File | React.ChangeEvent<HTMLInputElement>) => {
+        let file;
+        if (e instanceof File) file = e;
+        else if (e.target.files && e.target.files.length > 0) file = e.target.files[0];
+        if (!file) return;
+
+        const imageDataUrl = await readFile(file);
+        setImageSrc(imageDataUrl);
     };
 
     return (
@@ -149,7 +152,8 @@ const App = () => {
                 </>
             ) : (
                 <Layout>
-                    <input type="file" onChange={onFileChange} accept="image/*" />
+                    {/* <input type="file" onChange={onFileChange} accept="image/*" /> */}
+                    <Dropzone onFileChange={onFileChange} />
                 </Layout>
             )}
         </>
