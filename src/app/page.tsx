@@ -4,16 +4,9 @@ import React, { useState, useCallback } from "react";
 import Cropper, { Area } from "react-easy-crop";
 import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 import { Slider, Track, Range, Thumb } from "@radix-ui/react-slider";
-import { getOrientation } from "get-orientation/browser";
-import { getCroppedImg, getRotatedImage } from "./utils/canvas";
+import { getCroppedImg } from "./utils/canvas";
 import Layout from "./components/layout";
 import Image from "next/image";
-
-const ORIENTATION_TO_ANGLE: { [key: string]: number } = {
-  "3": 180,
-  "6": 90,
-  "8": -90,
-};
 
 function readFile(file: File): Promise<string> {
   return new Promise((resolve) => {
@@ -55,18 +48,6 @@ const App = () => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
-
-      try {
-        // apply rotation if needed
-        const orientation = await getOrientation(file);
-        const rotation = ORIENTATION_TO_ANGLE[orientation];
-        if (rotation) {
-          imageDataUrl = await getRotatedImage(imageDataUrl, rotation);
-        }
-      } catch (e) {
-        console.warn("failed to detect the orientation");
-      }
-
       setImageSrc(imageDataUrl);
     }
   };
@@ -105,7 +86,7 @@ const App = () => {
                   <Range className="absolute bg-black rounded-full h-full" />
                 </Track>
                 <Thumb
-                  className="block w-5 h-5 bg-white rounded-full focus:outline-none hover:ring-2 focus:ring-4 ring-black/20 transition-all duration-300 shadow-[0px_0px_6px_rgba(0,0,0,0.40)]"
+                  className="block w-4 h-4 bg-gray-800 rounded-full outline-none hover:ring-4 active:ring-8 ring-black/20 transition-all duration-300"
                   aria-label="Zoom"
                 />
               </Slider>
@@ -125,7 +106,7 @@ const App = () => {
                   <Range className="absolute bg-black rounded-full h-full" />
                 </Track>
                 <Thumb
-                  className="block w-5 h-5 bg-white rounded-full focus:outline-none hover:ring-2 focus:ring-4 ring-black/20 transition-all duration-300 shadow-[0px_0px_6px_rgba(0,0,0,0.40)]"
+                  className="block w-4 h-4 bg-gray-800 rounded-full outline-none hover:ring-4 active:ring-8 ring-black/20 transition-all duration-300"
                   aria-label="Rotation"
                 />
               </Slider>
