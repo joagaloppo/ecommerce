@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Props {
     children?: React.ReactNode;
-    onFileChange: (e: File | React.ChangeEvent<HTMLInputElement>) => void;
+    onFileChange: (e: File) => void;
 }
 
 const Dropzone: React.FC<Props> = ({ onFileChange }) => {
@@ -65,10 +65,10 @@ const Dropzone: React.FC<Props> = ({ onFileChange }) => {
     }, []);
 
     return (
-        <div className="mx-auto flex w-full items-center justify-center">
+        <div className="mx-auto flex aspect-[9/16] max-w-[288px] items-center justify-center">
             <label
                 className={clsx(
-                    'flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100',
+                    'flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100',
                     dragging && 'text-blue border-blue-300 bg-blue-100 hover:bg-blue-100'
                 )}
                 ref={dropRef}
@@ -80,7 +80,16 @@ const Dropzone: React.FC<Props> = ({ onFileChange }) => {
                     </p>
                     <p className="text-xs text-gray-500">PNG / JPEG (MAX. 5 MB)</p>
                 </div>
-                <input className="hidden" type="file" onChange={onFileChange} accept="image/*" />
+                <input
+                    className="hidden"
+                    type="file"
+                    onChange={(e) => {
+                        if (e.target.files) {
+                            onFileChange(e.target.files[0]);
+                        }
+                    }}
+                    accept="image/*"
+                />
             </label>
         </div>
     );

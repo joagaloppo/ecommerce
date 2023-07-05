@@ -1,12 +1,11 @@
 'use client';
 
-import Dropzone from './components/Dropzone';
-import { useImageStore } from './state/imageStore';
+import useImageStore from '@/app/state/imageStore';
 import React, { useCallback, useState } from 'react';
 import Image from 'next/image';
-import { Dialog, DialogContent } from '@radix-ui/react-dialog';
 import { Range, Slider, Thumb, Track } from '@radix-ui/react-slider';
 import Cropper, { Area } from 'react-easy-crop';
+import Dropzone from '@/app/components/Dropzone';
 import Layout from '@/app/components/layout';
 import { getCroppedImg } from '@/app/utils/canvas';
 
@@ -34,6 +33,7 @@ const App = () => {
     const showCroppedImage = useCallback(async () => {
         try {
             if (imageSrc && croppedAreaPixels) {
+                console.log('Cropped Area Pixels', croppedAreaPixels);
                 const newCroppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, rotation);
                 console.log('done', { newCroppedImage });
                 setCroppedImage(newCroppedImage);
@@ -42,19 +42,10 @@ const App = () => {
         } catch (e) {
             console.error(e);
         }
-    }, [imageSrc, croppedAreaPixels, rotation]);
+    }, [imageSrc, croppedAreaPixels, rotation, setCroppedImage]);
 
-    const onClose = useCallback(() => {
-        setCroppedImage(null);
-    }, []);
-
-    const onFileChange = async (e: File | React.ChangeEvent<HTMLInputElement>) => {
-        let file;
-        if (e instanceof File) file = e;
-        else if (e.target.files && e.target.files.length > 0) file = e.target.files[0];
-        if (!file) return;
-
-        const imageDataUrl = await readFile(file);
+    const onFileChange = async (e: File) => {
+        const imageDataUrl = await readFile(e);
         setImageSrc(imageDataUrl);
         setShowEdit(true);
     };
@@ -126,7 +117,6 @@ const App = () => {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => {
-                                    croppedImage ? setShowEdit(false) : setImageSrc(null);
                                     setShowEdit(false);
                                 }}
                                 className="flex items-center justify-between rounded-md border-2 border-gray-600 px-6 py-1 text-xs font-semibold text-gray-800 outline-none ring-black/20 transition-all duration-300 hover:ring-4 active:ring-8"
@@ -149,9 +139,16 @@ const App = () => {
                             <Image
                                 height={896}
                                 width={504}
+                                src="/phone-bg.png"
+                                alt="Cropped"
+                                className="pointer-events-none absolute inset-0 top-12 mx-auto aspect-[9/16] h-auto max-w-[288px] rounded-lg"
+                            />
+                            <Image
+                                height={896}
+                                width={504}
                                 src={croppedImage}
                                 alt="Cropped"
-                                className="mx-auto w-72 rounded-lg"
+                                className="mx-auto aspect-[9/16] h-auto max-w-[288px] rounded-lg"
                             />
                             <div className="flex justify-center gap-3 pt-4">
                                 <button
@@ -169,7 +166,16 @@ const App = () => {
                             </div>
                         </>
                     ) : (
-                        <Dropzone onFileChange={onFileChange} />
+                        <>
+                            <Image
+                                height={896}
+                                width={504}
+                                src="/phone-bg.png"
+                                alt="Cropped"
+                                className="pointer-events-none absolute inset-0 top-12 mx-auto aspect-[9/16] h-auto max-w-[288px] rounded-lg"
+                            />
+                            <Dropzone onFileChange={onFileChange} />
+                        </>
                     )}
                 </Layout>
             )}

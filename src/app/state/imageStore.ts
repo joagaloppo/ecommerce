@@ -5,7 +5,9 @@ interface imageState {
     setCroppedImage: (croppedImage: string | null) => void;
 }
 
-export const useImageStore = create<imageState>()((set) => ({
+const useImageStore = create<imageState>()((set) => ({
     croppedImage: null,
     setCroppedImage: (croppedImage: string | null) => set({ croppedImage }),
 }));
+
+export default useImageStore;
