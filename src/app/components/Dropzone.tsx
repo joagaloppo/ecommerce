@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { HiOutlineCloudUpload as Upload } from 'react-icons/hi';
-import { useEffect, useRef, useState } from 'react';
+import { useAspectRatioStore } from '@/app/store';
 
 interface Props {
     children?: React.ReactNode;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const Dropzone: React.FC<Props> = ({ onFileChange }) => {
+    const { aspectRatio } = useAspectRatioStore();
     const [dragging, setDragging] = useState(false);
     const dropRef = useRef<HTMLLabelElement>(null);
     let dragCounter = 0;
@@ -62,31 +64,29 @@ const Dropzone: React.FC<Props> = ({ onFileChange }) => {
                 div.removeEventListener('drop', handleDrop);
             }
         };
-    }, []);
+    }, [handleDragIn, handleDragOut, handleDrop]);
 
     return (
-        <div className="mx-auto flex aspect-[9/16] max-w-[288px] items-center justify-center">
+        <div className="mx-auto flex max-w-[288px] items-center justify-center" style={{ aspectRatio }}>
             <label
                 className={clsx(
-                    'flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100',
-                    dragging && 'text-blue border-blue-300 bg-blue-100 hover:bg-blue-100'
+                    'flex h-full w-full cursor-pointer flex-col items-center justify-center bg-gray-50 hover:bg-gray-100',
+                    dragging && 'text-blue bg-blue-100 hover:bg-blue-100'
                 )}
                 ref={dropRef}
             >
-                <div className="flex flex-col items-center justify-center pb-6 pt-5">
-                    <Upload className="mb-3 h-10 w-10 text-gray-400" />
-                    <p className="mb-2 text-sm text-gray-500 ">
-                        <span className="font-medium">Click to upload</span> or drag and drop
+                <div className="flex flex-col items-center justify-center">
+                    <Upload className="mb-4 h-10 w-10 text-gray-400" />
+                    <p className="mb-2 px-4 text-center text-sm text-gray-500 ">
+                        <span className="font-semibold">Toca aqui </span>para seleccionar
+                        <br />o arrastra una imagen
                     </p>
-                    <p className="text-xs text-gray-500">PNG / JPEG (MAX. 5 MB)</p>
                 </div>
                 <input
                     className="hidden"
                     type="file"
                     onChange={(e) => {
-                        if (e.target.files) {
-                            onFileChange(e.target.files[0]);
-                        }
+                        if (e.target.files) onFileChange(e.target.files[0]);
                     }}
                     accept="image/*"
                 />

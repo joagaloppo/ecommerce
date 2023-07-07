@@ -4,4 +4,10 @@
 
 .reactEasyCrop_Cover_Vertical {
     max-width: none;
+    max-height: none;
+}
+
+.reactEasyCrop_CropArea.reactEasyCrop_CropAreaGrid {
+    width: 100% !important;
+    height: 100% !important;
 }

@@ -1,6 +1,6 @@
 {
     "parser": "@typescript-eslint/parser",
-    "plugins": ["import", "prettier", "@typescript-eslint"],
+    "plugins": ["prettier", "@typescript-eslint"],
     "extends": [
         "next/core-web-vitals",
         "airbnb-base",
@@ -15,7 +15,7 @@
     "rules": {
         "import/no-unresolved": "off", // don't trigger an error when importing from a path
         "import/extensions": "off", // don't trigger an error when importing from a path
-        // "prettier/prettier": ["error"], // trigger an error when prettier is not satisfied
+        "prettier/prettier": ["error"], // trigger an error when prettier is not satisfied
         "no-console": "off" // don't trigger an error when using console.log
     }
 }

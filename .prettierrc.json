@@ -1,15 +1,24 @@
 {
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "endOfLine": "auto",
-  "printWidth": 120,
-  "tabWidth": 4,
-  "importOrder": ["^react$", "^next/(.*)$", "^@radix-ui/(.*)$", "^react-easy-crop$", "^@/app/components/(.*)$", "^@/app/utils/(.*)$", "^/"],
-  "importOrderSortSpecifiers": false,
-  "tailwindFunctions": ["clsx"],
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss"
-  ]
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "endOfLine": "auto",
+    "printWidth": 120,
+    "tabWidth": 4,
+    "importOrder": [
+        "^react$",
+        "^next/(.*)$",
+        "^[^@]",
+        "^@radix-ui/(.*)$",
+        "^react-easy-crop$",
+        "^@/app/components/(.*)$",
+        "^@/app/store$",
+        "^@/app/utils/(.*)$",
+        "^react-icons/fa$",
+        "^react-icons/fa6$",
+        "^/"
+    ],
+    "importOrderSortSpecifiers": false,
+    "tailwindFunctions": ["clsx"],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"]
 }
