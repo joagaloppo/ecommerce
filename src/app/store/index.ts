@@ -18,6 +18,6 @@ interface aspectRatioState {
 }
 
 export const useAspectRatioStore = create<aspectRatioState>((set) => ({
-    aspectRatio: 8 / 16,
+    aspectRatio: 292 / 550,
     setAspectRatio: (aspectRatio: number) => set({ aspectRatio }),
 }));

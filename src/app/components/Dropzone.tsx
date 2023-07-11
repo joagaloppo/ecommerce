@@ -67,10 +67,10 @@ const Dropzone: React.FC<Props> = ({ onFileChange }) => {
     }, [handleDragIn, handleDragOut, handleDrop]);
 
     return (
-        <div className="mx-auto flex max-w-[288px] items-center justify-center" style={{ aspectRatio }}>
+        <div className="relative inset-0 mx-auto flex w-full max-w-[288px]" style={{ aspectRatio }}>
             <label
                 className={clsx(
-                    'flex h-full w-full cursor-pointer flex-col items-center justify-center bg-gray-50 hover:bg-gray-100',
+                    'flex w-full cursor-pointer flex-col items-center justify-center bg-gray-50 hover:bg-gray-100',
                     dragging && 'text-blue bg-blue-100 hover:bg-blue-100'
                 )}
                 ref={dropRef}

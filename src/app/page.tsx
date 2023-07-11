@@ -65,11 +65,11 @@ const App = () => {
                 <>
                     <div className="relative mx-auto mt-6 h-auto w-[288px]" style={{ aspectRatio }}>
                         <Image
-                            height={800}
-                            width={450}
+                            width={250}
+                            height={500}
                             src={phoneTemplateSrc}
                             alt="Cropped"
-                            className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[288px]"
+                            className="pointer-events-none absolute inset-0 z-10 mx-auto w-full max-w-[288px]"
                             style={{ aspectRatio }}
                         />
                         <Cropper
@@ -93,25 +93,30 @@ const App = () => {
                     />
                 </>
             ) : (
-                <div className="relative mx-auto mt-6 h-auto w-[288px]" style={{ aspectRatio }}>
+                <div className="absolute inset-0 mx-auto mt-6 h-auto ">
                     {croppedImage ? (
                         <>
-                            <Image
-                                height={800}
-                                width={450}
-                                src={phoneTemplateSrc}
-                                alt="Cropped"
-                                className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[288px]"
+                            <div
+                                className="pointer-events-none relative inset-0 mx-auto w-full max-w-[288px]"
                                 style={{ aspectRatio }}
-                            />
-                            <Image
-                                height={800}
-                                width={450}
-                                src={croppedImage}
-                                alt="Cropped"
-                                className="mx-auto max-w-[288px] rounded-lg"
-                                style={{ aspectRatio }}
-                            />
+                            >
+                                <Image
+                                    width={250}
+                                    height={500}
+                                    src={phoneTemplateSrc}
+                                    alt="Cropped"
+                                    className="pointer-events-none absolute inset-0 z-10 mx-auto w-full max-w-[288px]"
+                                    style={{ aspectRatio }}
+                                />
+                                <Image
+                                    width={250}
+                                    height={500}
+                                    src={croppedImage}
+                                    alt="Cropped"
+                                    className="pointer-events-none absolute inset-0 mx-auto w-full max-w-[288px]"
+                                    style={{ aspectRatio }}
+                                />
+                            </div>
                             <SaveOptions
                                 setCroppedImage={setCroppedImage}
                                 setImageSrc={setImageSrc}
@@ -120,33 +125,30 @@ const App = () => {
                             />
                         </>
                     ) : (
-                        <>
+                        <div className="relative inset-0 mx-auto w-full max-w-[288px]">
                             <Image
-                                height={800}
-                                width={450}
+                                width={250}
+                                height={500}
                                 src={phoneTemplateSrc}
-                                alt="Cropped"
-                                className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[288px]"
-                                onLoad={(e: any) => {
-                                    console.log(
-                                        `Phone template sizes: ${e.target.naturalWidth}/${e.target.naturalHeight}`
-                                    );
-                                    setAspectRatio(e.target.naturalWidth / e.target.naturalHeight);
-                                }}
+                                alt="Phone Template"
+                                className="pointer-events-none absolute inset-0 z-10 mx-auto w-full max-w-[288px]"
+                                onLoad={(e: any) => setAspectRatio(e.target.naturalWidth / e.target.naturalHeight)}
                                 style={{ aspectRatio }}
                             />
                             <Dropzone onFileChange={onFileChange} />
-                            <button
-                                onClick={() =>
-                                    setPhoneTemplateSrc(
-                                        phoneTemplateSrc === '/iphone_14.png' ? '/iphone_x.png' : '/iphone_14.png'
-                                    )
-                                }
-                                className="mx-auto mt-4 flex w-full max-w-[288px] items-center justify-center gap-2 rounded-full border-2 border-transparent bg-gray-800 px-6 py-2 text-sm font-medium text-white outline-none ring-black/20 transition-all duration-300 hover:ring-4 active:ring-8"
-                            >
-                                Change phone
-                            </button>
-                        </>
+                            <div className="pt-4">
+                                <button
+                                    onClick={() =>
+                                        setPhoneTemplateSrc(
+                                            phoneTemplateSrc === '/iphone_14.png' ? '/iphone_x.png' : '/iphone_14.png'
+                                        )
+                                    }
+                                    className="mx-auto flex w-full max-w-[288px] items-center justify-center gap-2 rounded-full border-2 border-transparent bg-gray-800 px-6 py-2 text-sm font-medium text-white outline-none ring-black/20 transition-all duration-300 hover:ring-4 active:ring-8"
+                                >
+                                    Change phone
+                                </button>
+                            </div>
+                        </div>
                     )}
                 </div>
             )}
