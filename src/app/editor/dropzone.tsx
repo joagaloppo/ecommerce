@@ -1,7 +1,7 @@
+import { useAspectRatioStore } from '@/app/editor/store';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { HiOutlineCloudUpload as Upload } from 'react-icons/hi';
-import { useAspectRatioStore } from '@/app/store';
 
 interface Props {
     children?: React.ReactNode;

@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+// --------------------------------------------------------------------------------- //
+
 interface imageState {
     croppedImage: string | null;
     setCroppedImage: (croppedImage: string | null) => void;

@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+div::-webkit-scrollbar {
+    height: 4px;
+}
+
+div::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.01);
+}
+
+div::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
 .reactEasyCrop_Cover_Vertical {
     max-width: none;
     max-height: none;
