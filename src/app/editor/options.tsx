@@ -1,3 +1,5 @@
+'use client';
+
 import { FaTimes as Close, FaTrash as Trash, FaEdit as Edit, FaSave as Save } from 'react-icons/fa';
 import { FaMagnifyingGlass as Zoom, FaCheck as Check } from 'react-icons/fa6';
 import { Range, Slider, Thumb, Track } from '@radix-ui/react-slider';

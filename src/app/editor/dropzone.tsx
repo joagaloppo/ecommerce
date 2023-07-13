@@ -1,3 +1,5 @@
+'use client';
+
 import { useAspectRatioStore } from '@/app/editor/store';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';

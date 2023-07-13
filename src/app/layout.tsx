@@ -1,8 +1,8 @@
-import { Inter, Chivo } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
+import ProgressBar from './utils/progressBar';
 
 const inter = Inter({ subsets: ['latin'] });
-const chivo = Chivo({ subsets: ['latin'] });
 
 export const metadata = {
     title: 'Create Next App',
@@ -15,7 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <head>
                 <meta name="viewport" content="width=device-width, user-scalable=no" />
             </head>
-            <body className={`${chivo.className} debug-screens`}>{children}</body>
+            <body className={`${inter.className} debug-screens`}>
+                {children}
+                <ProgressBar />
+            </body>
         </html>
     );
 }

@@ -1,99 +1,26 @@
 'use client';
 
-import Recommended from '@/app/[id]/recommended';
+import Recommended from '@/app/[slug]/recommended';
+import items from '@/app/constants/items';
+import models from '@/app/constants/models';
 import { useState } from 'react';
 import { FaShippingFast as Ship } from 'react-icons/fa';
+import { HiShoppingBag as Cart } from 'react-icons/hi';
 import Footer from '@/app/components/footer';
 import Nav from '@/app/components/nav';
-
-const items = [
-    {
-        id: '1',
-        name: 'Funda Distorsion - Pink',
-        price: 2500,
-        images: [
-            'https://mukbarcelona.com/cdn/shop/files/cherrybomb.jpg?v=1687182950&width=400',
-            'https://mukbarcelona.com/cdn/shop/files/DISTORSION-PINK.png?v=1688399135&width=600',
-            'https://mukbarcelona.com/cdn/shop/files/distorsion_8a396539-5071-4d48-a057-07724763c47e.jpg?v=1688399135&width=600',
-        ],
-    },
-    {
-        id: '2',
-        name: 'Funda Portrait - Pink',
-        price: 2500,
-        images: [
-            'https://mukbarcelona.com/cdn/shop/files/portraitpinkcopia.jpg?v=1688399449&width=400',
-            'https://mukbarcelona.com/cdn/shop/files/cherrybomb.jpg?v=1687182950&width=400',
-            'https://mukbarcelona.com/cdn/shop/files/distorsion_8a396539-5071-4d48-a057-07724763c47e.jpg?v=1688399135&width=600',
-        ],
-    },
-    {
-        id: '3',
-        name: 'Funda Cherrybomb - Pink',
-        price: 2500,
-        images: [
-            'https://mukbarcelona.com/cdn/shop/files/cherrybomb.jpg?v=1687182950&width=400',
-            'https://mukbarcelona.com/cdn/shop/files/distorsion_8a396539-5071-4d48-a057-07724763c47e.jpg?v=1688399135&width=600',
-            'https://mukbarcelona.com/cdn/shop/files/portraitpinkcopia.jpg?v=1688399449&width=400',
-        ],
-    },
-];
-
-const models = {
-    apple: [
-        {
-            name: 'iPhone 12 Pro Max',
-            value: 'iphone-12-pro-max',
-        },
-        {
-            name: 'iPhone 12 Pro',
-            value: 'iphone-12-pro',
-        },
-        {
-            name: 'iPhone 12',
-            value: 'iphone-12',
-        },
-    ],
-    samsung: [
-        {
-            name: 'Galaxy S21 Ultra',
-            value: 'galaxy-s21-ultra',
-        },
-        {
-            name: 'Galaxy S21+',
-            value: 'galaxy-s21-plus',
-        },
-        {
-            name: 'Galaxy S21',
-            value: 'galaxy-s21',
-        },
-    ],
-    motorola: [
-        {
-            name: 'Moto G60',
-            value: 'moto-g60',
-        },
-        {
-            name: 'Moto G40 Fusion',
-            value: 'moto-g40-fusion',
-        },
-        {
-            name: 'Moto G20',
-            value: 'moto-g20',
-        },
-    ],
-};
+import ScrollUp from '@/app/utils/scrollUp';
 
 interface Props {
-    params: { id: string };
+    params: { slug: string };
 }
 
 const Page: React.FC<Props> = ({ params }) => {
-    const item = items.find((i) => i.id === params.id);
+    const item = items.find((i) => i.slug === params.slug);
     const [selectedModel, setSelectedModel] = useState(models.apple);
 
     return (
         <>
+            <ScrollUp />
             <Nav />
             <div className="h-[70px]" />
             <div className="p-4">
@@ -102,7 +29,7 @@ const Page: React.FC<Props> = ({ params }) => {
                         <div className="flex flex-col gap-4">
                             <div className="overflow-x-auto">
                                 <div className="flex w-full items-start justify-center">
-                                    <img src={item.images[0]} alt={item.name} className="max-h-[320px] w-auto" />
+                                    <img src={item.image} alt={item.name} className="max-h-[320px] w-auto" />
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1">
@@ -110,7 +37,7 @@ const Page: React.FC<Props> = ({ params }) => {
                                 <p className="text-xl font-bold text-pink-500">$ {item.price}</p>
                                 <div className="flex items-center gap-2">
                                     <Ship className="h-4 w-auto text-gray-600" />
-                                    <p className="text-md font-normal text-gray-600">Recibelo el 20 de octubre</p>
+                                    <p className="text-md font-normal text-gray-600">A partir del 20 de octubre</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-6 py-2">
@@ -140,19 +67,18 @@ const Page: React.FC<Props> = ({ params }) => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="flex w-full py-4">
-                                <button className="w-full rounded-sm bg-pink-500 py-2.5 font-normal text-white">
+                            <div className="flex w-full py-2">
+                                <button className="flex w-full items-center justify-center gap-2 rounded-sm bg-pink-500 py-2.5 font-normal text-white">
+                                    <Cart className="h-4 w-auto" />
                                     Agregar al carrito
                                 </button>
                             </div>
-                            <hr />
                         </div>
                     </>
                 ) : (
                     <div>Not found</div>
                 )}
             </div>
-
             <Recommended />
             <Footer />
         </>

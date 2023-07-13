@@ -1,4 +1,6 @@
-import { FaFacebook as Facebook, FaInstagram as Instagram, FaTwitter as Twitter } from 'react-icons/fa';
+'use client';
+
+import { FaPinterest as Pinterest, FaInstagram as Instagram, FaTiktok as Tiktok } from 'react-icons/fa';
 
 interface FooterProps {
     children?: React.ReactNode;
@@ -7,14 +9,14 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = () => {
     return (
         <>
-            <footer className="flex w-full border-t px-4 py-8">
+            <footer className="flex w-full border-t px-4 py-12">
                 <div className="mx-auto flex w-full flex-col gap-8">
                     <div className="flex w-full items-center justify-between">
                         <img src="/jetlag.png" alt="Jetlag" className="mx-auto h-10 w-auto" />
                         <div className="flex w-full items-center justify-end gap-4">
-                            <Facebook className="h-6 w-auto text-gray-600" />
-                            <Twitter className="h-6 w-auto text-gray-600" />
                             <Instagram className="h-6 w-auto text-gray-600" />
+                            <Tiktok className="h-6 w-auto text-gray-600" />
+                            <Pinterest className="h-6 w-auto text-gray-600" />
                         </div>
                     </div>
                     <div className="flex w-full items-start justify-between">
