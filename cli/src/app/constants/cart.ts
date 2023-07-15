@@ -1,4 +1,16 @@
-const cartItems = [
+// const cartItems: {
+//     name: string;
+//     image: string;
+//     price: number;
+//     quantity: number;
+// }[] = [];
+
+const cartItems: {
+    name: string;
+    image: string;
+    price: number;
+    quantity: number;
+}[] = [
     {
         name: 'Drippy',
         image: 'https://mukbarcelona.com/cdn/shop/products/WHYNOT.jpg?v=1678380427&width=500',

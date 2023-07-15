@@ -1,4 +1,9 @@
-const items = [
+const items: {
+    name: string;
+    price: number;
+    image: string;
+    slug: string;
+}[] = [
     {
         name: 'Iniciales',
         image: 'https://mukbarcelona.com/cdn/shop/products/SINGLEINTIAL.jpg?v=1678380210&width=400',

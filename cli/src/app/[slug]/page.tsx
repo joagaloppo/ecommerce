@@ -1,6 +1,5 @@
 'use client';
 
-import Recommended from '@/app/[slug]/recommended';
 import items from '@/app/constants/items';
 import models from '@/app/constants/models';
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import { HiShoppingBag as Cart } from 'react-icons/hi';
 import Footer from '@/app/components/footer';
 import Nav from '@/app/components/nav';
 import ScrollUp from '@/app/utils/scrollUp';
+import Products from '@/app/landing/products';
 
 interface Props {
     params: { slug: string };
@@ -23,7 +23,7 @@ const Page: React.FC<Props> = ({ params }) => {
             <ScrollUp />
             <Nav />
             <div className="h-[70px]" />
-            <div className="p-4">
+            <div className="mx-auto max-w-screen-lg p-4">
                 {item ? (
                     <>
                         <div className="flex flex-col gap-4">
@@ -76,10 +76,15 @@ const Page: React.FC<Props> = ({ params }) => {
                         </div>
                     </>
                 ) : (
-                    <div>Not found</div>
+                    <div className="flex h-[calc(300px)] w-full flex-col items-center justify-center gap-4">
+                        <h2 className="text-5xl font-bold text-gray-800">404</h2>
+                        <p className="text-center text-lg font-medium text-gray-800">
+                            El producto que estas buscando no existe o no esta disponible.
+                        </p>
+                    </div>
                 )}
             </div>
-            <Recommended />
+            <Products />
             <Footer />
         </>
     );

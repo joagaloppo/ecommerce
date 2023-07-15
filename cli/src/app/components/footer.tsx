@@ -9,7 +9,8 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = () => {
     return (
         <>
-            <footer className="flex w-full border-t px-4 py-12">
+            <hr />
+            <footer className="mx-auto flex w-full max-w-screen-lg border-t px-4 py-12">
                 <div className="mx-auto flex w-full flex-col gap-8">
                     <div className="flex w-full items-center justify-between">
                         <img src="/jetlag.png" alt="Jetlag" className="mx-auto h-10 w-auto" />

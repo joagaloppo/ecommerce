@@ -15,7 +15,8 @@
     "rules": {
         "import/no-unresolved": "off", // don't trigger an error when importing from a path
         "import/extensions": "off", // don't trigger an error when importing from a path
-        "prettier/prettier": ["error"], // trigger an error when prettier is not satisfied
+        "prettier/prettier": ["warn"], // warn when prettier finds an error
+        "@next/next/no-img-element": "off", // don't trigger an error when using <img> tag
         "no-console": "off" // don't trigger an error when using console.log
     }
 }

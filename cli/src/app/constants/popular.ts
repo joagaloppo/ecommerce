@@ -1,4 +1,9 @@
-const popular = [
+const popular: {
+    name: string;
+    price: number;
+    image: string;
+    slug: string;
+}[] = [
     {
         name: 'Distorsion - Pink',
         price: 2500,

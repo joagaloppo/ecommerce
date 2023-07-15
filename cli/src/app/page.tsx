@@ -11,9 +11,8 @@ const Page = () => {
         <>
             <ScrollUp />
             <Nav />
-            <div className="h-[70px]" />
+            <div className="h-[64px]" />
             <Featured />
-            <hr />
             <Products />
             <Footer />
         </>
